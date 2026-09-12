@@ -1,0 +1,31 @@
+name: Build Soko-jumla APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pakua Code
+        uses: actions/checkout@v4
+
+      - name: Weka Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.3'
+          channel: 'stable'
+
+      - name: Pakua Packages
+        run: flutter pub get
+
+      - name: Jenga APK
+        run: flutter build apk --release
+
+      - name: Hifadhi APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: soko-jumla.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
