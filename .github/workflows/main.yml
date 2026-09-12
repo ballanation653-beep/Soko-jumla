@@ -1,0 +1,7 @@
+- name: Pakua Packages
+  working-directory: app # <-- badilisha 'app' na jina la folder lako
+  run: flutter pub get
+
+- name: Jenga APK
+  working-directory: app # <-- na hapa pia
+  run: flutter build apk --release
